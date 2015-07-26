@@ -1,0 +1,17 @@
+{
+	"filter": "#love",
+	"twitter": {
+		"clientSecret": "l92899Csw76UhwF16AYcibrANhv4IgsWtyMPqG8u8yTDc0Vmnj",
+		"clientKey": "o4FHIVxn8GwsG3O5g5lelWwBF",
+		"accessToken": "3376630619-KyF2on3cAKV6hQYQVUg2Fxu7bhaFXyDxA66sX1r",
+		"accessTokenSecret": "bRRktAD593oKk9WgPKMVh5Z3X7XCSk8FtrRb9rdLkvqgT"
+	},
+	"mongo": {
+		"url": "mongodb://localhost/test",
+		"model": "tweets"	
+	},
+	"auth": {
+		"directory": "./authenticationLayer/dirtyWords/",
+		"lists": ["zh", "cs", "da", "nl", "en", "eo", "fi", "fr", "de", "hu", "it", "ja", "tlh", "ko", "no", "fa", "pl", "pt", "ru", "es", "sv", "th", "tr"]
+	}
+}
