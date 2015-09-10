@@ -8,6 +8,10 @@ module.exports = (function initDataDispatcher() {
     		database.addTweet(tweet);
     	},
 
+        addStats: function(country) {
+            database.addStats(country);
+        },
+
     	disconnect: function() {
     		database.disconnect();
     	}

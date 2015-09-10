@@ -1,7 +1,7 @@
-module.exports = (function initApp() {
+;module.exports = (function initApp() {
 	'use strict';
 
-	global.config = require('./config');
+	global.config = require('../config');
 	var Twitter   = require('twitter');
 	var Database  = require('./databaseLayer/databaseDispatcher');
 	var Authentication = require('./authenticationLayer/auth');
