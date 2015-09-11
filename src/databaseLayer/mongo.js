@@ -40,6 +40,8 @@ module.exports = (function initMongoDB() {
 		newStat.save(function createNewCustomer(err, response){
 			if(err) {
 				console.error('Error saving new stat: ', err);
+			} else {
+				console.log('New country added to stats!');
 			}
 		});
 	};
@@ -76,7 +78,8 @@ module.exports = (function initMongoDB() {
 		 * Add one to the country
 		 */
 		addStats: function(country) {
-			Stats.findOne({countr: country}, function mongoAddStats(err, result) {
+			console.log('here: ', country);
+			Stats.findOne({country: country}, function mongoAddStats(err, result) {
 				if(!result) {
 					checkValidCountry(country);
 				} else {

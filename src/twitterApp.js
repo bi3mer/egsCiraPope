@@ -5,6 +5,7 @@
 	var Twitter   = require('twitter');
 	var Database  = require('./databaseLayer/databaseDispatcher');
 	var Authentication = require('./authenticationLayer/auth');
+	var Stats = require('./logicLayer/stats');
 
  	// Twitter Access Information
 	var client = new Twitter({
@@ -21,12 +22,13 @@
 			stream.on('data', function(tweet) {
 				if(Authentication.isValid(tweet.text)) {
 					Database.addTweet(tweet.text);
+					Database.addStats(Stats.getCountry(tweet.text));
 					console.log('tweet added');
 				}
 			});
 		 
 			stream.on('error', function(error) {
-				console.log('error found', error);
+				console.log('error found', error.stack);
 			});
 		});
 	});
