@@ -1,21 +1,13 @@
 ;module.exports = (function initWebApp() {
 	'use strict';
 
-	// Get Database
-	var Database  = require('./databaseLayer/databaseDispatcher');
+	// Requirements
+	var App   = require('./components/app');
+	var React = require('react');
 
-	return {
-		sendMapData: function(res) {
-			Database.getStats(function(response) {
-				if(response === undefined) {
-					res.status(500);
-				} else {
-					res.status(200);
-					res.send(response);
-				}
-
-				res.end();
-			});
-		}
-	}
+	// Begin react rendering
+	React.render(
+		<APP />,
+		document.getElementById('main')
+	);
 }());

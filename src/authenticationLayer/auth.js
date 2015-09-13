@@ -7,7 +7,7 @@
 	
 	return {
 		populateBadWordsFile: function(index, self, callback, oldCallback) {
-			fs.readFile('src/authenticationLayer/dirtyWords/' + global.config.auth.lists[index], 'utf8', function (err,data) {
+			fs.readFile('/' + __dirname + '/dirtyWords/' + global.config.auth.lists[index], 'utf8', function (err,data) {
 				if (err) {
 					console.error('Error found in populateBadWordsFile: ', err);
 					console.error('working directory: ', __dirname);

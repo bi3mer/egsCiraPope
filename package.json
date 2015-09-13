@@ -2,7 +2,10 @@
   "name": "egsCiraPope",
   "version": "0.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "gulpfile.js",
+  "bin": {
+    "egsCiraPope": "webApp.js"
+  },
   "dependencies": {
     "body-parser": "^1.13.3",
     "country-list": "^0.0.3",
@@ -10,7 +13,12 @@
     "express": "^4.13.3",
     "flux": "^2.1.1",
     "fs": "^0.0.2",
+    "gulp": "^3.9.0",
+    "gulp-browserify": "^0.5.1",
+    "gulp-concat": "^2.6.0",
     "mongoose": "^4.1.4",
+    "react": "^0.13.3",
+    "reactify": "^1.1.1",
     "twitter": "^1.2.5"
   },
   "devDependencies": {},

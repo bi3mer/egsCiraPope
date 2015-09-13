@@ -5,7 +5,7 @@
     global.config = require('./config'); // define config as global
 
     // Web app requriements
-    var WebApp = require('./src/webApp');
+    var ServerApp = require('./src/serverApp');
 
     // NPM requires
     var express    = require('express');
@@ -27,7 +27,7 @@
 
     // Paths
     app.post(global.config.server.paths.getMap, function requestMapData(req, res) {
-    	WebApp.sendMapData(res);
+    	ServerApp.sendMapData(res);
     });
 
     // Open server up to calls
