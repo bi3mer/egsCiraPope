@@ -75,8 +75,9 @@ module.exports = (function initMongoDB() {
 		},
 
 		/**
-		 * Add one to the country
-		 */
+         * Add stats to database based on country
+         * @param {string} country
+         */
 		addStats: function(country) {
 			console.log('here: ', country);
 			Stats.findOne({country: country}, function mongoAddStats(err, result) {
@@ -98,6 +99,21 @@ module.exports = (function initMongoDB() {
 				}
 			});
 		},
+
+		/**
+         * Get stats and return in the callback
+         * @param {function} callback
+         */
+        getStats: function(callback) {
+        	// empty query to find all
+            Stats.find({}, function mongoGetStats(err, statData) {
+            	if(err) {
+            		callback(undefined);
+            	} else {
+            		callback(statData);
+            	}
+            });
+        },
 
 		/** 
 		 * Disconnect from mongodb

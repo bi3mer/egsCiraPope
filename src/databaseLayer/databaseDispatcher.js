@@ -4,14 +4,34 @@ module.exports = (function initDataDispatcher() {
     var database = require('./mongo.js');
 
     return {
+        /**
+         * Call database tweet to database
+         * @param {string} tweet
+         */
     	addTweet: function(tweet) {
     		database.addTweet(tweet);
     	},
 
+        /**
+         * call database to add stats to database based on country
+         * @param {string} country
+         */
         addStats: function(country) {
             database.addStats(country);
         },
 
+
+        /**
+         * Call database to get stats and return in the callback
+         * @param {function} callback
+         */
+        getStats: function(callback) {
+            database.getStats(callback);
+        },
+
+        /**
+         * Disconnect from database
+         */
     	disconnect: function() {
     		database.disconnect();
     	}
