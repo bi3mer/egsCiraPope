@@ -1,11 +1,11 @@
 ;module.exports = (function initApp() {
 	'use strict';
 
-	global.config = require('../config');
-	var Twitter   = require('twitter');
-	var Database  = require('./databaseLayer/databaseDispatcher');
+	// Requirements
+	global.config      = require('../config');
+	var Twitter        = require('twitter');
+	var Database       = require('./databaseLayer/databaseDispatcher');
 	var Authentication = require('./authenticationLayer/auth');
-	var Stats = require('./logicLayer/stats');
 
  	// Twitter Access Information
 	var client = new Twitter({
@@ -20,13 +20,14 @@
 		// Access twitter
 		client.stream('statuses/filter', {track: global.config.filter}, function(stream) {
 			stream.on('data', function(tweet) {
-				if(Authentication.isValid(tweet.text)) {
+				var obj = Authentication.isValid(tweet.text)
+				if(obj.isValid) {
 					Database.addTweet(tweet.text);
-					Database.addStats(Stats.getCountry(tweet.text));
-					console.log('tweet added');
+					Database.addStats(obj.country);
+					console.log('tweet and stats added');
 				}
 			});
-		 
+
 			stream.on('error', function(error) {
 				console.log('error found', error.stack);
 			});

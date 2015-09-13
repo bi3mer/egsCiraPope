@@ -2,7 +2,7 @@ module.exports = (function initMongoDB() {
 	'use strict';
 
 	var mongoose  = require('mongoose');
-	var countries = require('country-list')();
+	var countries = require('i18n-iso-countries');
 
 	// Connect to mongo
 	var options = {
@@ -47,7 +47,7 @@ module.exports = (function initMongoDB() {
 	};
 
 	function checkValidCountry(country) {
-		if(countries.getName(country) !== undefined) {
+		if(countries.getName(country, "en") !== undefined) {
 			saveNewValidCountry(country);
 		}
 	};

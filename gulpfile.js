@@ -6,7 +6,7 @@
     gulp.task('browserify', function() {
         gulp.src('src/webApp.js')
             .pipe(browserify({transform: 'reactify'}))
-            .pipe(concat('webApp.js'))
+            .pipe(concat('bundle.js'))
             .pipe(gulp.dest('bin'));
     });
 

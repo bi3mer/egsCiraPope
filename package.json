@@ -4,17 +4,18 @@
   "description": "",
   "main": "gulpfile.js",
   "bin": {
-    "egsCiraPope": "webApp.js"
+    "egsCiraPope": "bundle.js"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
-    "country-list": "^0.0.3",
+    "datamaps": "^0.4.0",
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "flux": "^2.1.1",
     "fs": "^0.0.2",
     "gulp": "^3.9.0",
     "gulp-browserify": "^0.5.1",
+    "i18n-iso-countries": "^0.9.0",
     "gulp-concat": "^2.6.0",
     "mongoose": "^4.1.4",
     "react": "^0.13.3",

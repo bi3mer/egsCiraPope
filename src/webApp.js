@@ -7,7 +7,7 @@
 
 	// Begin react rendering
 	React.render(
-		<APP />,
+		<App />,
 		document.getElementById('main')
 	);
 }());
