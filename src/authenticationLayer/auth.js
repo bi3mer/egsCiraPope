@@ -30,7 +30,7 @@
 
 		// TODO: comment this!
 		populateBadWords: function(index, self, callback) {
-			if(index < global.config.auth.lists.length) {
+			if(index < global.config.auth.countryCodeLength) {
 				self.populateBadWordsFile(index, self, self.populateBadWords, callback);
 			} else {
 				callback();
@@ -42,7 +42,7 @@
 			this.populateBadWords(0, this, callback);
 		},
 
-		// TODO: comment this and modularize this!
+		// TODO: comment and modularize this!
 		isValid: function(string) {
 			var returnObj = {
 				isValid: false,
@@ -69,10 +69,10 @@
 				// Loop through array to check each set of words
 				for(var i = 0; i < stringArr.length; ++i) {
 					// Check length of string and if it contains a # as the first character
-					if(stringArr[i].length === 4 && stringArr[i][0] === '#') {
+					if(stringArr[i].length === global.config.auth.countryCodeLength && stringArr[i][0] === '#') {
 						// CHeck if string is a valid country by removing hashtag and converting to upper case
 						var country = stringArr[i].slice(1).toUpperCase();
-						if(countries.getName(country, "en") !== undefined) {
+						if(countries.getName(country, 'en') !== undefined) {
 							returnObj.isValid = true;
 							returnObj.country = country;
 							break;

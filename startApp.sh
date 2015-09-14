@@ -1,2 +1,3 @@
 #!/bin/bash
-mongod | node server.js | node src/twitterApp.js
+gulp
+mongod & node server.js & node src/twitterApp.js

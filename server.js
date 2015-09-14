@@ -30,6 +30,10 @@
     	ServerApp.sendMapData(res);
     });
 
+    app.get('/', function getBasePage(req, res) {
+        res.render('index.html');
+    });
+
     // Open server up to calls
     app.listen(global.config.server.port, function serverListen() {
         console.log('Listening on port', global.config.server.port);
