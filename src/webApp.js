@@ -2,9 +2,12 @@
 	'use strict';
 
 	// Requirements
-	var App   = require('./components/app.react');
 	var React = require('react');
+	var App   = require('./components/app.react');
+	var Actions = require('./actions/actions');
+	
 	global.config = require('../config');
+	require('./actions/actions').requestMap();
 
 	window.React = React;
 

@@ -1,9 +1,8 @@
-var React = require('react');
-var AppStore = require('../stores/store');
-var states = {
-	BUILD_MAP: require('./dataMap.react'),
-	REQUEST_MAP: require('./requestMap.react')
-};
+var React       = require('react');
+var AppStore    = require('../stores/store');
+var ActionTypes = require('../constants/constants').ActionTypes;
+var DataMap     = require('./dataMap.react.js');
+var RequestMap  = require('./requestMap.react.js')
 
 ;module.exports = React.createClass({
 	/**
@@ -24,8 +23,20 @@ var states = {
 	 * Render datamap to the screen
 	 */
 	render: function() {
-		var renderState = states[AppStore.getState()];
-		console.log('Render: ', AppStore.getState());
+		switch(AppStore.getState()) {
+
+			case ActionTypes.REQUEST_MAP:
+				return ( <RequestMap />)
+				break;
+
+			case ActionTypes.BUILD_MAP:
+				return ( <DataMap />)
+				break;
+
+			default:
+				console.error('Unkexpected error in app rendering');
+				break;
+		}
 		return(
 			<renderState />
 		);

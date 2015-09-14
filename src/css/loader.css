@@ -1,0 +1,35 @@
+/*
+Source found at: http://stephanwagner.me/only-css-loading-spinner;
+*/
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+ 
+@-webkit-keyframes spinner {
+    to {-webkit-transform: rotate(360deg);}
+}
+ 
+.spinner {
+    min-width: 100px;
+    min-height: 100px;
+}
+ 
+.spinner:before {
+    content: 'Loading…';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-top: -80px;
+    margin-left: -80px;
+}
+ 
+.spinner:not(:required):before {
+    content: '';
+    border-radius: 50%;
+    border-top: 4px solid #03ade0;
+    border-right: 4px solid transparent;
+    animation: spinner 1.2s linear infinite;
+    -webkit-animation: spinner 1.2s linear infinite;
+}

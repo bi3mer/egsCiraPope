@@ -1,16 +1,12 @@
-var React = require('react');
-var DataMaps = require('datamaps');
-
-module.exports = React.createClass({
+;module.exports = require('react').createClass({
 	/** 
 	 * Render datamap to the screen
 	 */
 	render: function() {
-		console.log('here!!!!!');
+		console.log('rendering in requestMap');
+		// http://www.css-spinners.com/spinner/whirly
 		return (
-			<h3>
-				TODO: replace with spinning wheel
-			</h3>
+			<div className="spinner"></div>
 		);
 	}
 });

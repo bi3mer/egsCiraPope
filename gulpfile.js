@@ -13,6 +13,8 @@
     gulp.task('copy', function() {
         gulp.src('src/index.html')
             .pipe(gulp.dest('bin'));
+        gulp.src('src/css/loader.css')
+            .pipe(gulp.dest('bin'));
     });
 
     gulp.task('default',['browserify', 'copy']);

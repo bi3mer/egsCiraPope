@@ -2,8 +2,8 @@
 
 var AppDispatcher = require('../dispatcher/webAppDispatcher');
 var ActionTypes	 = require('../constants/constants').ActionTypes;
-var $ = require('jquery');
 var assign = require('object-assign');
+var $ = require('jquery');
 var EventEmitter = require('events').EventEmitter;
 
 // Map data
@@ -30,56 +30,65 @@ var Store = assign({}, EventEmitter.prototype, {
 	removeChangeListener: function(callback) {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
-
-	getMapData: function(id) {
-		return mapData;
-	},
-
-	requestMap: function() {
-		console.log('here!');
-		$.ajax({
-			type: 'POST',
-			url: global.config.server.paths.getMap,
-			data: {},
-			success: function(data){
-				console.log(data);
-				mapData = data;
-				AppStore.emitChange();
-			},
-			error: function(xhr, textStatus, error){
-				console.log(xhr.statusText);
-				console.log(textStatus);
-				console.log(error);
-				errorText = xhr.responseText;
-				AppStore.emitChange();
-			}
-		});
-	},
-
-	getState: function() {
-		return state;
-	},
-
-	setState: function(_state) {
-		state = _state;
-	}
 });
 
+Store.getMapData = function(id) {
+	return mapData;
+};
+
+Store.setMapData = function(data) {
+	mapData = data;
+};
+
+Store.getState = function() {
+	return state;
+};
+
+Store.setState = function(_state) {
+	state = _state;
+};
+
+/**
+ * request map and then set AppStore data accordingly
+ */
+Store.requestMap = function() {
+	console.log('requesting new map');
+	$.ajax({
+		type: 'POST',
+		url: global.config.server.paths.getMap,
+		data: {},
+		success: function(data){
+			console.log('Data: ', data);
+			Store.setMapData(data);
+			Store.setState(ActionTypes.BUILD_MAP);
+			Store.emitChange();
+		},
+		error: function(xhr, textStatus, error){
+			console.log(xhr.statusText);
+			console.log(textStatus);
+			console.log(error);
+			errorText = xhr.responseText;
+			Store.emitChange();
+		}
+	});
+};
+
 Store.dispatchToken = AppDispatcher.register(function(action) {
+	state = action.type;
 	switch(action.type) {
 
 		case ActionTypes.REQUEST_MAP:
-			this.requestMap();
-			Store.emitChange();
+			Store.requestMap();
 			break;
 
 		case ActionTypes.BUILD_MAP:
-			Store.emitChange();
+			// just emit change
 			break;
 
 		default:
 			// do nothing
 	}
+	Store.emitChange();
 
 });
 

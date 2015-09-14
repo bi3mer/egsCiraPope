@@ -8,8 +8,7 @@
 		/**
 		 * Dispatch action to create an actiontype of requesting map info
 		 */
-		requestMap: function() {
-			AppDispatcher.dispatch({
+		requestMap: function() {			AppDispatcher.dispatch({
 				type: ActionTypes.REQUEST_MAP,
 			});
 		},

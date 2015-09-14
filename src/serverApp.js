@@ -11,6 +11,7 @@
 		 */
 		sendMapData: function(res) {
 			Database.getStats(function(response) {
+				console.log(response);
 				if(response === undefined) {
 					res.status(500);
 				} else {
