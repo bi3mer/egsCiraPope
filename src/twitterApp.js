@@ -3,16 +3,17 @@
 
 	// Requirements
 	global.config      = require('../config');
+	var TwitterConfig  = require('../twitterConfig'); // Replace with your own config
 	var Twitter        = require('twitter');
 	var Database       = require('./databaseLayer/databaseDispatcher');
 	var Authentication = require('./authenticationLayer/auth');
 
  	// Twitter Access Information
 	var client = new Twitter({
-		consumer_key: global.config.twitter.clientKey,
-		consumer_secret: global.config.twitter.clientSecret,
-		access_token_key: global.config.twitter.accessToken,
-		access_token_secret: global.config.twitter.accessTokenSecret
+		consumer_key: TwitterConfig.twitter.clientKey,
+		consumer_secret: TwitterConfig.twitter.clientSecret,
+		access_token_key: TwitterConfig.twitter.accessToken,
+		access_token_secret: TwitterConfig.twitter.accessTokenSecret
 	});
 
 	// Initialize Authentication

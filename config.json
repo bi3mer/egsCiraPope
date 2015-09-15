@@ -1,0 +1,59 @@
+{
+	"dev": false,
+	"filter": "#USA",
+	"mongo": {
+		"url": "mongodb://localhost/test",
+		"modelTweet": "tweets",
+		"modelStats": "countryStats"
+	},
+	"auth": {
+		"directory": "./authenticationLayer/dirtyWords/",
+		"countryCodeLength": 4,
+		"lists": ["zh", "cs", "da", "nl", "en", "eo", "fi", "fr", "de", "hu", "it", "ja", "tlh", "ko", "no", "fa", "pl", "pt", "ru", "es", "sv", "th", "tr"]
+	},
+	"server": {
+		"port": 3000,
+		"paths": {
+			"getMap": "/getMapData"
+		}
+	},
+	"webApp": {
+		"timeOut": 5000,
+		"mapTimeOut": 5,
+		"divStyle": {
+			"position": "relative",
+			"width": "1000px",
+			"height": "600px",
+			"margin-left": "auto",
+    		"margin-right": "auto"
+		},
+		"colors": {
+			"very hot": "#CC4731",
+			"hot": "#CA5E5B",
+			"Light hot": "#EAA9A8",
+			"Light cold":" #A9C0DE",
+			"cold": "#306596",
+			"very cold": "#000080",
+			"defaultFill": "#000080"
+		},
+		"colorPercentages": [{
+				"color": "very hot",
+				"percentage": 0.9
+			}, {
+				"color": "hot",
+				"percentage": 0.8
+			}, {
+				"color": "Light hot",
+				"percentage": 0.6
+			}, {
+				"color": "Light cold",
+				"percentage": 0.4
+			}, {
+				"color": "cold",
+				"percentage": 0.3
+			}, {
+				"color": "very colod",
+				"percentage": 0.1
+			}]
+	}
+}

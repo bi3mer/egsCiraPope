@@ -1,0 +1,8 @@
+{
+	"twitter": {
+		"clientSecret": "XXXX",
+		"clientKey": "XXXX",
+		"accessToken": "XXXX",
+		"accessTokenSecret": "XXXX"
+	}
+}
