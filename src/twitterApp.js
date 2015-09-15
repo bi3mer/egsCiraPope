@@ -29,7 +29,7 @@
 			});
 
 			stream.on('error', function(error) {
-				console.log('error found', error.stack);
+				console.log('error found in twitter stream', error.stack);
 			});
 		});
 	});

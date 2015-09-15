@@ -26,19 +26,18 @@ var RequestMap  = require('./requestMap.react.js')
 		switch(AppStore.getState()) {
 
 			case ActionTypes.REQUEST_MAP:
-				return ( <RequestMap />)
+				return ( <RequestMap />);
 				break;
 
 			case ActionTypes.BUILD_MAP:
-				return ( <DataMap />)
+				return ( 
+					<DataMap />	
+				);
 				break;
 
 			default:
 				console.error('Unkexpected error in app rendering');
 				break;
 		}
-		return(
-			<renderState />
-		);
 	}
 });
