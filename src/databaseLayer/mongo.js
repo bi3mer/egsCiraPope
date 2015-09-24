@@ -17,8 +17,10 @@ module.exports = (function initMongoDB() {
 	mongoose.connect(global.config.mongo.url, options);
 
 	// Template for all objects inside of daatabase
+	//TODO: update schema to include username
 	var tweetSchema = new mongoose.Schema({
 		tweet: String,
+		user: String
 	});
 
 	var statSchema = new mongoose.Schema({
@@ -57,9 +59,11 @@ module.exports = (function initMongoDB() {
 		 * Store tweet in database
 		 * @param {string} tweet - string to be stored in database
 		 */
-		addTweet: function(tweet) {
+		addTweet: function(tweet, user) {
+			console.log('user received: ', user);
 			var newTweet = Tweet({
-				tweet: tweet
+				tweet: tweet,
+				user: user
 			});
 
 			console.log(tweet);
