@@ -30,6 +30,10 @@
     	ServerApp.sendMapData(res);
     });
 
+    app.post(global.config.server.paths.getTweet, function requestTweet(req, res) {
+        console.log(req.body);
+    });
+
     app.get('/', function getBasePage(req, res) {
         res.render('index.html');
     });

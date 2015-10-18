@@ -8,8 +8,8 @@ module.exports = (function initDataDispatcher() {
          * Call database tweet to database
          * @param {string} tweet
          */
-    	addTweet: function(tweet, user) {
-    		database.addTweet(tweet, user);
+    	addTweet: function(tweet, user, country) {
+    		database.addTweet(tweet, user, country);
     	},
 
         /**

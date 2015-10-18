@@ -4,54 +4,46 @@ module.exports = (function initMongoDB() {
 	var mongoose  = require('mongoose');
 	var countries = require('i18n-iso-countries');
 
-	// Connect to mongo
-	var options = {
-		db: { 
-			native_parser: true 
-		}, server: { 
-			poolSize: 5,
-			keepAlive: 1 
-		}
-	};
-
-	mongoose.connect(global.config.mongo.url, options);
+	mongoose.connect(global.config.mongo.url, global.config.mongo.options);
 
 	// Template for all objects inside of daatabase
-	//TODO: update schema to include username
 	var tweetSchema = new mongoose.Schema({
 		tweet: String,
-		user: String
-	});
-
-	var statSchema = new mongoose.Schema({
-		country: String,
-		count:   Number
+		user: String,
+		country: String
 	});
 
 	// Access Point to Database
 	var Tweet = mongoose.model(global.config.mongo.modelTweet, tweetSchema);
-	var Stats = mongoose.model(global.config.mongo.modelStats, statSchema);
 
 	// Private functions
-	function saveNewValidCountry(country) {
-		var newStat = Stats({
-			country: country,
-			count: 1
-		});
-
-		newStat.save(function createNewCustomer(err, response){
-			if(err) {
-				console.error('Error saving new stat: ', err);
-			} else {
-				console.log('New country added to stats!');
-			}
-		});
+	/**
+	 * Check if the country is valid
+	 * @param {String} country
+	 * @return {Boolean}
+	 */
+	function checkValidCountry(country) {
+		var countryValid = false
+		if(countries.getName(country, "en") !== undefined) {
+			countryValid = true
+		}
+		return countryValid;
 	};
 
-	function checkValidCountry(country) {
-		if(countries.getName(country, "en") !== undefined) {
-			saveNewValidCountry(country);
+	/**
+	 * TODO: document this
+	 */
+	function constructReturnStats(stats) {
+		var countryArr = [];
+
+		for(var key in stats) {
+			countryArr.push({
+				country: key,
+				count: stats[key]
+			});
 		}
+
+		return countryArr;
 	};
 
 	return {
@@ -59,65 +51,58 @@ module.exports = (function initMongoDB() {
 		 * Store tweet in database
 		 * @param {string} tweet - string to be stored in database
 		 */
-		addTweet: function(tweet, user) {
+		addTweet: function(tweet, user, country) {
 			console.log('user received: ', user);
-			var newTweet = Tweet({
-				tweet: tweet,
-				user: user
-			});
 
-			console.log(tweet);
-			console.log(newTweet);
+			if(checkValidCountry(country)) {
+				// Create tweet to store to database
+				var newTweet = Tweet({
+					tweet: tweet,
+					user: user,
+					country: country
+				});
 
-			newTweet.save(function createNewCustomer(err, response){
+				// Console out basic info
+				console.log(newTweet);
+
+				// Save to database
+				newTweet.save(function createNewCustomer(err, response){
+					if(err) {
+						console.error(err);
+					} else {
+						console.log('success');
+					}
+				});
+			}
+		},
+
+		/**
+		 * Get stats and return in the callback
+		 * @param {function} callback
+		 */
+		getStats: function(callback) {
+			// empty query to find all
+			Tweet.find({}, function mongoGetStats(err, tweets) {
 				if(err) {
-					console.error(err);
+					callback(undefined);
 				} else {
-					console.log('success');
+					// Empty object to hold data
+					var returnData = {};
+
+					// Loop through data to get stats
+					for(var index in tweets) {
+						if(returnData[tweets[index].country]) {
+							returnData[tweets[index].country]++;
+						} else {
+							returnData[tweets[index].country] = 1
+						}
+					}
+
+					// Construct for front end format and callback
+					callback(constructReturnStats(returnData));
 				}
 			});
 		},
-
-		/**
-         * Add stats to database based on country
-         * @param {string} country
-         */
-		addStats: function(country) {
-			console.log('here: ', country);
-			Stats.findOne({country: country}, function mongoAddStats(err, result) {
-				if(!result) {
-					checkValidCountry(country);
-				} else {
-					// Update result variable and prep to save
-					++result.count;
-					var updateData = result.toObject();
-					var id = result._id;
-            		delete updateData._id
-
-            		// Update mongo with new data
-            		Stats.update({_id: id}, updateData, {upsert: true}, function(err) {
-            			if(err) {
-            				console.error('Error adding stats: ', err);
-            			}
-            		});
-				}
-			});
-		},
-
-		/**
-         * Get stats and return in the callback
-         * @param {function} callback
-         */
-        getStats: function(callback) {
-        	// empty query to find all
-            Stats.find({}, function mongoGetStats(err, statData) {
-            	if(err) {
-            		callback(undefined);
-            	} else {
-            		callback(statData);
-            	}
-            });
-        },
 
 		/** 
 		 * Disconnect from mongodb

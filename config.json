@@ -1,10 +1,19 @@
 {
 	"dev": false,
-	"filter": "#USA",
+	"filter": "#BRA",
 	"mongo": {
 		"url": "mongodb://localhost/test",
 		"modelTweet": "tweets",
-		"modelStats": "countryStats"
+		"modelStats": "countryStats",
+		"options": {
+			"db": { 
+				"native_parser": true 
+			}, 
+			"server": { 
+				"poolSize": 5,
+				"keepAlive": 1 
+			}
+		}
 	},
 	"auth": {
 		"directory": "./authenticationLayer/dirtyWords/",
@@ -14,11 +23,12 @@
 	"server": {
 		"port": 3000,
 		"paths": {
-			"getMap": "/getMapData"
+			"getMap": "/getMapData",
+			"getTweet": "/getTweet"
 		}
 	},
 	"webApp": {
-		"timeOut": 5000,
+		"timeOut": 15000,
 		"mapTimeOut": 5,
 		"divStyle": {
 			"position": "relative",

@@ -7,7 +7,17 @@
 	var Actions = require('./actions/actions');
 	
 	global.config = require('../config');
-	require('./actions/actions').requestMap();
+
+	// Call after a few seconds of loading
+	setTimeout(function() {
+		Actions.requestMap();
+	}, 1000);
+
+	// Cotninuos calls
+	setInterval(function() {
+		console.log('here!');
+		Actions.requestMap();
+	}, global.config.webApp.timeOut);
 
 	window.React = React;
 

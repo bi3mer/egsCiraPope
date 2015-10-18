@@ -63,7 +63,12 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 			},
 			element: document.getElementById('map'),
 			fills: global.config.webApp.colors, 
-			data: {}
+			data: {},
+			done: function(datamap) {
+				datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+					console.error("Must release action to set store variable: ", geography.properties.name)
+				});
+			}
 		};
 
 		// Get Map Data
@@ -97,7 +102,7 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 				document.getElementById('map').innerHTML = '';
 
 				// console
-				console.log('Created map obj: ', self.createDataMapsObj);
+				//console.log('Created map obj: ', self.createDataMapsObj);
 
 				// Create Map
 				new Datamap(self.createDataMapsObj());

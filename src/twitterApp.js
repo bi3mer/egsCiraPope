@@ -23,10 +23,9 @@
 			stream.on('data', function(tweet) {
 				var obj = Authentication.isValid(tweet.text)
 				if(obj.isValid) {
-					console.log(tweet)
+					// console.log(tweet)
 					console.log('user name is ------ ', tweet.user.screen_name);
-					Database.addTweet(tweet.text, tweet.user.screen_name);
-					Database.addStats(obj.country);
+					Database.addTweet(tweet.text, tweet.user.screen_name, obj.country);
 					console.log('tweet and stats added');
 				}
 			});
