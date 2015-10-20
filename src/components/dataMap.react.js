@@ -94,9 +94,9 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 	 },
 
 	renderMap: function() {
-	 	var self = this;
-		setTimeout(function(){
-			console.log('doc: ', document.getElementById('map'))
+		console.log('doc: ', document.getElementById('map'));
+		var self = this;
+		setTimeout(function() {
 			if(document.getElementById('map') !== undefined && document.getElementById('map') !== null) {
 				// Clear HTML text
 				document.getElementById('map').innerHTML = '';
@@ -108,7 +108,7 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 				console.log('rendermap soon!');
 				self.renderMap();
 			}
-		}, global.config.webApp.mapTimeOut); 
+		}, global.config.webApp.requestMapTimeOut);
 	},
 
 	/** 
@@ -120,7 +120,7 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 		// Create div
 		return ( 
 			<div id="map" style={global.config.webApp.divStyle}>
-				Error: reload page if not populated in the 5 seconds.
+				<div className="spinner" />
 			</div>
 		);
 	}

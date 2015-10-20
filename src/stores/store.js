@@ -101,27 +101,6 @@ Store.requestMap = function() {
 	});
 };
 
-Store.requestTweet = function() {
-	console.log('requesting new tweet');
-	$.ajax({
-		type: 'POST',
-		url: global.config.server.paths.getTweet,
-		data: {
-			country: highlightedCountry
-		},
-		success: function(data) {
-			document.getElementById('twitterStream').innerHTML = data.user + ' says: ' +  data.tweet;
-		},
-		error: function(xhr, textStatus, error) {
-			console.log(xhr.statusText);
-			console.log(textStatus);
-			console.log(error);
-			errorText = xhr.responseText;
-			Store.emitChange();
-		}
-	});
-};
-
 Store.dispatchToken = AppDispatcher.register(function(action) {
 	switch(action.type) {
 

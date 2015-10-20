@@ -1,6 +1,6 @@
 {
 	"dev": false,
-	"filter": "#USA",
+	"filter": "#OneLovePhilly",
 	"mongo": {
 		"url": "mongodb://localhost/test",
 		"modelTweet": "tweets",
@@ -28,6 +28,7 @@
 		}
 	},
 	"webApp": {
+		"requestMapTimeOut": 1000,
 		"tweetTimeout": 10000,
 		"mapTimeOut": 15000,
 		"divStyle": {
