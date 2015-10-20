@@ -34,15 +34,18 @@ module.exports = (function initMongoDB() {
 
 	// TODO: document
 	function createNewCountry(newTweet, country) {
+		console.log('creating new country!');
 		// Country doens't exist, create new array and palce in new array 
 		var newCountry = {};
 		newCountry.country = country;
 		newCountry.tweets  = [newTweet];
 
+		console.log('here2: ', newCountry);
 		// Save new country to database
 		Tweet(newCountry).save(function mongoSaveNewCustomer(err, response) {
+			console.log('here3');
 			if(err) {
-				console.error(err);
+				console.error('Error: ', err, response);
 			} else {
 				console.log('Saved new country');
 			}
@@ -81,19 +84,24 @@ module.exports = (function initMongoDB() {
 				};
 
 				// Console out basic info
-				console.log(newTweet);
+				console.log('new tweet: ', newTweet);
 
 				// Query database to see if country exists
 				var query = {};
 				query.country = country
 
 				Tweet.find(query, function mongoTestTweet(err, countryExists){
-					if(countryExists.length > 0) {
+					console.dir(countryExists);
+					if(countryExists && countryExists.length > 0) {
+						console.log('pushing to existing country: ', country);
 						pushToExistingCountry(newTweet, country);
 					} else {
+						console.log('creating new country: ', country);
 						createNewCountry(newTweet, country);
 					}
 				});
+			} else {
+				console.error("invalid country");
 			}
 		},
 
