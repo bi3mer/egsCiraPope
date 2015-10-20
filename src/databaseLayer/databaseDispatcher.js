@@ -20,13 +20,16 @@ module.exports = (function initDataDispatcher() {
             database.addStats(country);
         },
 
-
         /**
          * Call database to get stats and return in the callback
          * @param {function} callback
          */
         getStats: function(callback) {
             database.getStats(callback);
+        },
+
+        getTweet: function(query, callback) {
+            database.getTweet(query, callback);
         },
 
         /**

@@ -1,6 +1,6 @@
 {
 	"dev": false,
-	"filter": "#BRA",
+	"filter": "#USA",
 	"mongo": {
 		"url": "mongodb://localhost/test",
 		"modelTweet": "tweets",
@@ -28,8 +28,8 @@
 		}
 	},
 	"webApp": {
-		"timeOut": 15000,
-		"mapTimeOut": 5,
+		"tweetTimeout": 10000,
+		"mapTimeOut": 15000,
 		"divStyle": {
 			"position": "relative",
 			"width": "1000px",

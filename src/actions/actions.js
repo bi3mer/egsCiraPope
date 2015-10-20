@@ -21,6 +21,12 @@
 			AppDispatcher.dispatch({
 				type: ActionTypes.BUILD_MAP,
 			});
+		},
+
+		requestTweet: function() {
+			AppDispatcher.dispatch({
+				type:ActionTypes.REQUEST_TWEET,
+			});
 		}
 	};
 }());

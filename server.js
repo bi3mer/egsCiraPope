@@ -31,7 +31,7 @@
     });
 
     app.post(global.config.server.paths.getTweet, function requestTweet(req, res) {
-        console.log(req.body);
+        ServerApp.sendTweet(req.body, res);
     });
 
     app.get('/', function getBasePage(req, res) {

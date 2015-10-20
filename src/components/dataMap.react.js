@@ -101,9 +101,6 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 				// Clear HTML text
 				document.getElementById('map').innerHTML = '';
 
-				// console
-				//console.log('Created map obj: ', self.createDataMapsObj);
-
 				// Create Map
 				new Datamap(self.createDataMapsObj());
 			} else {

@@ -10,23 +10,34 @@ var EventEmitter = require('events').EventEmitter;
 var mapData = null;
 
 // State
-var state = ActionTypes.REQUEST_MAP;
+var mapState   = ActionTypes.REQUEST_MAP;
+var tweetState = ActionTypes.REQUEST_TWEET;
+var highlightedCountry = '';
 
 // TODO: add to config file
 var CHANGE_EVENT = 'change';
 
 var Store = assign({}, EventEmitter.prototype, {
+	/**s
+	 * Emits change to listener on change
+	 * @param {function} callback
+	 */
 	emitChange: function() {
 		this.emit(CHANGE_EVENT);
 	},
 
 	/**s
+	 * Adds listener to when changes are made to the store
 	 * @param {function} callback
 	 */
 	addChangeListener: function(callback) {
 		this.on(CHANGE_EVENT, callback);
 	},
 
+	/**s
+	 * Removess listener to when changes are made to the store
+	 * @param {function} callback
+	 */
 	removeChangeListener: function(callback) {
 		this.removeListener(CHANGE_EVENT, callback);
 	},
@@ -41,11 +52,27 @@ Store.setMapData = function(data) {
 };
 
 Store.getState = function() {
-	return state;
+	return mapState;
 };
 
 Store.setState = function(_state) {
-	state = _state;
+	mapState = _state;
+};
+
+Store.getTweetState = function() {
+	return tweetState;
+};
+
+Store.setTweetState = function(_tweetState) {
+	tweetState = _tweetState;
+};
+
+Store.setHighlighedCountry = function(country) {
+	highlightedCountry = country;
+};
+
+Store.getHighlighedCountry = function() {
+	return highlightedCountry;
 };
 
 /**
@@ -64,6 +91,28 @@ Store.requestMap = function() {
 			Store.emitChange();
 		},
 		error: function(xhr, textStatus, error){
+			console.error("ERROR on request map!: ");
+			console.error(xhr.statusText);
+			console.error(textStatus);
+			console.error(error);
+			errorText = xhr.responseText;
+			Store.emitChange();
+		}
+	});
+};
+
+Store.requestTweet = function() {
+	console.log('requesting new tweet');
+	$.ajax({
+		type: 'POST',
+		url: global.config.server.paths.getTweet,
+		data: {
+			country: highlightedCountry
+		},
+		success: function(data) {
+			document.getElementById('twitterStream').innerHTML = data.user + ' says: ' +  data.tweet;
+		},
+		error: function(xhr, textStatus, error) {
 			console.log(xhr.statusText);
 			console.log(textStatus);
 			console.log(error);
@@ -74,15 +123,20 @@ Store.requestMap = function() {
 };
 
 Store.dispatchToken = AppDispatcher.register(function(action) {
-	state = action.type;
 	switch(action.type) {
 
 		case ActionTypes.REQUEST_MAP:
+			Store.setMapData(null);
+			mapState = action.type;
 			Store.requestMap();
 			break;
 
 		case ActionTypes.BUILD_MAP:
-			// just emit change
+			mapState = action.type;
+			break;
+
+		case ActionTypes.REQUEST_TWEET:
+			Store.requestTweet();
 			break;
 
 		default:

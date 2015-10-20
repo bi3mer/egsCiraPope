@@ -21,6 +21,25 @@
 
 				res.end();
 			});
-		}
+		},
+
+		// TODO: document
+		sendTweet: function(body, res) {
+			var query = body
+			console.log('query: ', query);
+			if(body.country === '') {
+				query = {}
+			}
+
+			Database.getTweet(query, function(tweet) {
+				if(tweet === undefined) {
+					res.status(500);
+				} else {
+					res.status(200);
+					res.send(tweet);
+				}
+				res.end();
+			})
+		},
 	}
 }());
