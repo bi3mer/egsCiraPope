@@ -15,7 +15,7 @@
             .pipe(gulp.dest('bin'));
         gulp.src('src/css/loader.css')
             .pipe(gulp.dest('bin'));
-        gulp.src('src/css/footer.css')
+        gulp.src('src/css/footer.css') 
             .pipe(gulp.dest('bin'));
     });
 
