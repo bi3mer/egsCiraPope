@@ -1,6 +1,6 @@
 {
 	"dev": false,
-	"filter": "#USA",
+	"filter": "#OneLovePhilly",
 	"mongo": {
 		"url": "mongodb://localhost/test",
 		"modelTweet": "tweets",
