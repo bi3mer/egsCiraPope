@@ -21,6 +21,14 @@
 			Database.addTweet('colan is awesome #RUS 2', '@Coaln', 'RUS');
 		}, 2000);
 
+		Database.addTweet('colan is awesome #ZAF 2', '@Coaln', 'ZAF');
+		setTimeout(function() {
+			Database.addTweet('colan is awesome #ZAF 2', '@Coaln', 'ZAF');
+			Database.addTweet('colan is awesome #ZAF 2', '@Coaln', 'ZAF');
+			Database.addTweet('colan is awesome #ZAF 2', '@Coaln', 'ZAF');
+			Database.addTweet('colan is awesome #ZAF 2', '@Coaln', 'ZAF');
+		}, 2000);
+
 		Database.addTweet('colan is awesome #BRA 2', '@Coaln', 'BRA');
 
 		Database.addTweet('colan is awesome #USA 2', '@Coaln', 'USA');

@@ -25,6 +25,9 @@
 		"paths": {
 			"getMap": "/getMapData",
 			"getTweet": "/getTweet"
+		}, 
+		"tweets": {
+			"noTweetFoundText": "Check back later after tweeting has begun"
 		}
 	},
 	"webApp": {
@@ -39,30 +42,36 @@
     		"margin-right": "auto"
 		},
 		"colors": {
-			"very hot": "#CC4731",
-			"hot": "#CA5E5B",
-			"Light hot": "#EAA9A8",
-			"Light cold":" #A9C0DE",
-			"cold": "#306596",
-			"very cold": "#000080",
-			"defaultFill": "#000080"
+			"very hot": "#5c1d1f",
+			"hot": "#963032",
+			"Light hot": "#c64d4f",
+			"Light cold": "#4d8cc6",
+			"cold": "#3672a9",
+			"very cold": "#2a5883",
+			"defaultFill": "#1d3e5c"
 		},
-		"colorPercentages": [{
+		"colorPercentages": [
+			{
 				"color": "very hot",
 				"percentage": 0.9
-			}, {
+			}, 
+			{
 				"color": "hot",
 				"percentage": 0.8
-			}, {
+			}, 
+			{
 				"color": "Light hot",
 				"percentage": 0.6
-			}, {
+			}, 
+			{
 				"color": "Light cold",
 				"percentage": 0.4
-			}, {
+			}, 
+			{
 				"color": "cold",
 				"percentage": 0.3
-			}, {
+			}, 
+			{
 				"color": "very colod",
 				"percentage": 0.1
 			}]

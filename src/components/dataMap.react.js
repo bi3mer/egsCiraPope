@@ -7,7 +7,7 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 	 * Find highest count
 	 * @param {object} mapData
 	 */
-	getHightestCountry: function(mapData) {
+	getHighestCountry: function(mapData) {
 		var largest = null;
 		if(mapData.length > 0) {
 			// set largest to first element
@@ -29,14 +29,19 @@ require('../../node_modules/datamaps/dist/datamaps.world.js');
 	 */
 	addMapColors: function(mapData) {
 		// Get largest tweet count
-		var largest = this.getHightestCountry(mapData);
+		var largest = this.getHighestCountry(mapData);
 
 		// Assign colors based on percentages
 		for(var i = 0; i < mapData.length; ++i) {
-			mapData[i].color = 'defaultFill';
+			if(mapData[i].count > 0) {
+				mapData[i].color = 'very cold';
+			} else {
+				mapData[i].color = 'defaultFill';
+			}
 
 			// find proper color
 			for(var j = 0; j < global.config.webApp.colorPercentages.length; ++j) {
+				console.log('here: ', mapData[i].country, ': ', largest * global.config.webApp.colorPercentages[i].percentage < mapData[i].count);
 				if(largest * global.config.webApp.colorPercentages[i].percentage < mapData[i].count) {
 					mapData[i].color = global.config.webApp.colorPercentages[i].color;
 					break;

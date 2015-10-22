@@ -142,17 +142,23 @@ module.exports = (function initMongoDB() {
 				}
 
 				// Get random tweet
-				var length = countries[countryIndex].tweets.length;
-				var index = 1;
-				if(length > 1) {
-					index = Math.floor(Math.random() * countries[countryIndex].tweets.length);
+				var length = 0;
+				if(countries[countryIndex] && countries[countryIndex].tweets) {
+					length = countries[countryIndex].tweets.length;
+					var index = 0;
+					if(length > 1) {
+						index = Math.floor(Math.random() * countries[countryIndex].tweets.length);
+					}
+
+					// remove _id
+					delete countries[countryIndex].tweets[index]._id;
+
+					// Send tweet info back
+					callback(countries[countryIndex].tweets[index]);
+				}  else {
+					callback(global.config.server.tweets.noTweetFoundText);
 				}
-
-				// remove _id
-				delete countries[countryIndex].tweets[index]._id;
-
-				// Send tweet info back
-				callback(countries[countryIndex].tweets[index]);
+				
 			});
 		},
 
